@@ -7,6 +7,7 @@ package pl.jdeveloper.facade;
 import java.util.List;
 import javax.ejb.Local;
 import pl.jdeveloper.entities.Lesson;
+import pl.jdeveloper.facade.filters.LessonsFilter;
 
 /**
  *
@@ -24,9 +25,10 @@ public interface LessonFacadeLocal {
     Lesson find(Object id);
 
     List<Lesson> findAll();
+    
+    List<Lesson> findAllBy(LessonsFilter filter);
 
     List<Lesson> findRange(int[] range);
-
-    int count();
     
+    int count();
 }

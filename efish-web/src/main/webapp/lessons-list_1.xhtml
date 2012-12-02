@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/templates/main.xhtml">
+
+        <ui:define name="pagetitle">
+            <b>${msg['admUsers.title']}</b>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <h:form>
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red"
+                                infoStyle="color: green"
+                                layout="table"/>
+                </h:panelGroup>
+                <rich:panel header="Lekcje - lista">
+                    <h:commandButton value="Wczytaj / odśwież"
+                                     action="#{lessonsManagedBean.readLessons()}"/>
+                </rich:panel>
+
+                <br/>
+
+                <rich:panel header="Wczytane dane">
+                    <rich:dataTable id="lessonsDataTable"
+                                    var="lesson"
+                                    value="#{lessonsManagedBean.lessons}"
+                                    rows="10"
+                                    rendered="#{lessonsManagedBean.lessons != null}">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <h:column>Tytuł</h:column>
+                                <h:column>Opis</h:column>
+                                <h:column>Data</h:column>
+                            </rich:columnGroup>
+                        </f:facet>
+
+                        <rich:column>#{lesson.title}</rich:column>
+                        <rich:column>#{lesson.description}</rich:column>
+                        <rich:column>
+                            <h:outputText value="#{lesson.eventDate}">
+                                <f:convertDateTime type="date"
+                                                   pattern="dd-MM-yyyy" />
+                            </h:outputText>
+                        </rich:column>
+                    </rich:dataTable>
+
+                    <h:outputText rendered="#{lessonsManagedBean.lessons == null}"
+                                  value="Brak danych"/>
+                </rich:panel>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view>
+        <h:head>
+            <title>${msg['app.title']}</title>
+        </h:head>
+
+        <h:body>
+
+            <h:outputStylesheet library="pl.efish" name="page.ecss" />
+
+            <table border="0"
+                   cellpadding="0"
+                   cellspacing="0"
+                   class="rich-page header_bg #{cc.attrs.pageClas}">
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="header_content rich-page-header #{cc.attrs.headerClass}">
+                                <!--<h1>${msg['app.headerLink']}</h1>-->
+                                <h:graphicImage url="/resources/images/efish-logo-50.png" />
+                            </div>
+                        </td>
+
+                        <td align="right"
+                            class="header_links_container">
+
+                            <h:outputLink value="http://jdeveloper.pl/">jDeveloper.pl</h:outputLink>
+                            <h:outputText value=" | "/>
+                            <h:outputLink value="http://github.com/lukasz-kalek/efish.git">efish@GitHub - Strona Projektu</h:outputLink>
+                            <h:outputText value=" | "/>
+                            <h:outputLink value="http://jboss.org/richfaces">Richfaces Project Site</h:outputLink>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100%"
+                            height="100%"
+                            class="bg_tabbody"
+                            colspan="2">
+
+                            <table cellpadding="0"
+                                   cellspacing="0"
+                                   border="0"
+                                   width="100%"
+                                   class="rich-page-content">
+
+                                <tbody>
+                                    <tr>
+                                        <td class="menu_col rich-page-sidebar">
+                                            <div class="menu_width spacer"></div>
+                                            <ui:include src="/templates/includes/navigation.xhtml" />
+                                        </td>
+
+                                        <td class="content_col rich-page-body">
+                                            <!--
+                                            <rich:panel styleClass="skin-chooser">
+                                                <ui:insert name="pagetitle">
+                                                    Page title missed
+                                                </ui:insert>
+                                            </rich:panel>
+                                            -->
+
+                                            <ui:insert name="body">
+                                                Body content missed
+                                            </ui:insert>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="footer_bg" colspan="2">
+                            <div class="footer_bg_content rich-page-footer">
+                                ${msg['app.footerText']}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </h:body>
+    </f:view>
+</html>
