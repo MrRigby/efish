@@ -9,7 +9,7 @@ body {
 
 .header_bg {
 	background-image:
-		"url(#{resource['pl.efiszka.richfaces.images:pgHdrGrad.png']})";
+		"url(#{resource['pl.jdeveloper.efish.richfaces.images:pgHdrGrad.png']})";
 	border-bottom: 1px solid #FFFFFF;
 	background-color: '#{richSkin.headerBackgroundColor}';
 	background-repeat: repeat-x;
@@ -18,7 +18,7 @@ body {
 
 .footer_bg {
 	background-image:
-		"url(#{resource['pl.efiszka.richfaces.images:pgFtrGrad.png']})";
+		"url(#{resource['pl.jdeveloper.efish.richfaces.images:pgFtrGrad.png']})";
 	border-top: 1px solid #FFFFFF;
 	background-color: '#{richSkin.headerBackgroundColor}';
 	background-repeat: repeat-x;
