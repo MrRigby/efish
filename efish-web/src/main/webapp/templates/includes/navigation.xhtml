@@ -10,26 +10,35 @@
 
         <rich:panel style="width: 200px" bodyClass="">
             <f:facet name="header">
+                <h:graphicImage url="/resources/images/menu-icon.png" />
+                <h:outputText value=" " />
                 <h:outputText value="Menu" />
             </f:facet>
 
             <h:link id="welcomeLink"
-                    outcome="/static/welcome"
-                    value="#{msg['menu.welcome']}" />
+                    outcome="/static/welcome">
+                <h:graphicImage url="/resources/images/start-icon.png" />
+                <h:outputText value=" " />
+                <h:outputText value="#{msg['menu.welcome']}" />
+            </h:link>
             <br/>
-
-            <!--
-            <h:link id="loginLink"
-                    outcome="/secured/login"
-                    value="#{msg['menu.login']}" />
-            <br/>
-            -->
 
             <h:link id="lessonsListLink"
-                    outcome="/secured/lessons-list"
-                    value="#{msg['menu.lessons']}" />
+                    outcome="/secured/lessons-list">
+                <h:graphicImage url="/resources/images/lesson-icon.png" />
+                <h:outputText value=" " />
+                <h:outputText value="#{msg['menu.lessons']}" />
+            </h:link>
             <br/>
-            
+
+            <h:link id="wordsListLink"
+                    outcome="/secured/lessons-list">
+                <h:graphicImage url="/resources/images/word-icon.png" />
+                <h:outputText value=" " />
+                <h:outputText value="#{msg['menu.words']}" />
+            </h:link>
+            <br/>
+
             <h:commandLink id="logoutCommandLink"
                            action="#{loginController.doLogout}"
                            value="#{msg['menu.logout']}" />
