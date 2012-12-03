@@ -123,7 +123,6 @@
             </plugin>
         </plugins>
     </build>
-
     <repositories>
         <repository>
             <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
