@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/main.xhtml">
+
+            <ui:define name="body">
+                <rich:messages id="messagePanel" />
+
+                <h:form id="wordsForm">
+                    <rich:panel>
+                        <f:facet name="header">
+                            <h:graphicImage url="/resources/images/word-icon.png" />
+                            <h:outputText value=" " />
+                            <h:outputText value="#{msg['wordsList.queryBy']}" />
+                        </f:facet>
+
+                        <h:panelGrid columns="3">
+                            <h:outputText value="&nbsp;" />
+                            <h:commandButton value="#{msg['button.show']}"
+                                             action="#{wordsController.readWords()}"/>
+                            <h:outputText value="&nbsp;" />
+
+                        </h:panelGrid>
+
+                    </rich:panel>
+                </h:form>
+
+                <br/>
+
+                <rich:dataTable id="wordsDataTable"
+                                var="word"
+                                value="#{wordsController.words}"
+                                rendered="#{wordsController.words != null}"
+                                style="width: 100%;">
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <h:column>#{msg['word.id']}</h:column>
+                            <h:column>#{msg['word.text1']}</h:column>
+                            <h:column>#{msg['word.text2']}</h:column>
+                            <h:column>#{msg['button.action']}</h:column>
+                        </rich:columnGroup>
+                    </f:facet>
+
+                    <rich:column>#{word.id}</rich:column>
+                    <rich:column>#{word.text1}</rich:column>
+                    <rich:column>#{word.text2}</rich:column>
+                    <rich:column>
+                        <h:form>
+                            <h:commandLink action="#{wordsController.readWords()}"
+                                           value="#{msg['wordsList.table.action']}" />
+                        </h:form>
+                    </rich:column>
+                </rich:dataTable>
+
+                <h:outputText rendered="#{wordsController.words == null}"
+                              value="#{msg['common.noData']}"/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

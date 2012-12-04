@@ -17,9 +17,9 @@ import pl.jdeveloper.facade.filters.LessonsFilter;
  *
  * @author lukasz
  */
-@ManagedBean
+@ManagedBean(name = "lessonsController")
 @ViewScoped
-public class LessonsManagedBean {
+public class LessonsController {
     
     @EJB
     private LessonFacadeLocal lessonFacade;
@@ -29,12 +29,6 @@ public class LessonsManagedBean {
     private Date queryByDateTo;
     
     private List<Lesson> lessons;
-    
-    /**
-     * Creates a new instance of LessonsManagedBean
-     */
-    public LessonsManagedBean() {
-    }
     
     public void readLessons() {
         LessonsFilter filter = new LessonsFilter(queryByTitle, queryByDateFrom, queryByDateTo);

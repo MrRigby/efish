@@ -32,14 +32,14 @@
                             <h:outputLabel for="title">
                                 <h:outputText value="#{msg['lessonsList.queryBy.title']}" />
                             </h:outputLabel>
-                            <h:inputText id="title" value="#{lessonsManagedBean.queryByTitle}" />
+                            <h:inputText id="title" value="#{lessonsController.queryByTitle}" />
                             <h:message for="title" styleClass="error" />
 
                             <h:outputLabel for="dateFrom">
                                 <h:outputText value="#{msg['lessonsList.queryBy.dateFrom']}" />
                             </h:outputLabel>
                             <rich:calendar id="dateFrom"
-                                           value="#{lessonsManagedBean.queryByDateFrom}"
+                                           value="#{lessonsController.queryByDateFrom}"
                                            datePattern="#{msg['format.date']}" />
                             <h:message for="dateFrom" styleClass="error" />
 
@@ -47,13 +47,13 @@
                                 <h:outputText value="#{msg['lessonsList.queryBy.dateTo']}" />
                             </h:outputLabel>
                             <rich:calendar id="dateTo"
-                                           value="#{lessonsManagedBean.queryByDateTo}"
+                                           value="#{lessonsController.queryByDateTo}"
                                            datePattern="#{msg['format.date']}" />
                             <h:message for="dateTo" styleClass="error" />
 
                             <h:outputText value="&nbsp;" />
                             <h:commandButton value="#{msg['button.show']}"
-                                             action="#{lessonsManagedBean.readLessons()}"/>
+                                             action="#{lessonsController.readLessons()}"/>
                             <h:outputText value="&nbsp;" />
 
                         </h:panelGrid>
@@ -65,9 +65,9 @@
 
                 <rich:dataTable id="lessonsDataTable"
                                 var="lesson"
-                                value="#{lessonsManagedBean.lessons}"
+                                value="#{lessonsController.lessons}"
                                 rows="10"
-                                rendered="#{lessonsManagedBean.lessons != null}"
+                                rendered="#{lessonsController.lessons != null}"
                                 style="width: 100%;">
                     <f:facet name="header">
                         <rich:columnGroup>
@@ -93,7 +93,7 @@
                     </rich:column>
                 </rich:dataTable>
 
-                <h:outputText rendered="#{lessonsManagedBean.lessons == null}"
+                <h:outputText rendered="#{lessonsController.lessons == null}"
                               value="#{msg['common.noData']}"/>
 
             </ui:define>
