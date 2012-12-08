@@ -8,12 +8,16 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,9 +41,6 @@ public class Word implements Serializable {
     @Column(name = "id")
     private Integer id;
     
-    @Column(name = "lesson_id")
-    private Integer lessonId;
-    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -51,6 +52,10 @@ public class Word implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "text2")
     private String text2;
+    
+    @ManyToOne(targetEntity = Lesson.class)
+    @JoinColumn(name = "lesson_id")
+    private Lesson lesson;
 
     public Word() {
     }
@@ -73,14 +78,6 @@ public class Word implements Serializable {
         this.id = id;
     }
 
-    public Integer getLessonId() {
-        return lessonId;
-    }
-
-    public void setLessonId(Integer lessonId) {
-        this.lessonId = lessonId;
-    }
-
     public String getText1() {
         return text1;
     }
@@ -95,6 +92,14 @@ public class Word implements Serializable {
 
     public void setText2(String text2) {
         this.text2 = text2;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 
     @Override

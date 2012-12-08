@@ -11,9 +11,12 @@
         <ui:composition template="/templates/main.xhtml">
 
             <ui:define name="body">
-                <rich:messages id="messagePanel" />
-
                 <h:form id="wordsForm">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red"
+                                    infoStyle="color: green"
+                                    layout="table" />
+                    </h:panelGroup>
                     <rich:panel>
                         <f:facet name="header">
                             <h:graphicImage url="/resources/images/word-icon.png" />
@@ -22,11 +25,30 @@
                         </f:facet>
 
                         <h:panelGrid columns="3">
+                            <h:outputLabel for="lesson">
+                                <h:outputText value="#{msg['wordsList.queryBy.lesson']}" />
+                            </h:outputLabel>
+                            <h:selectOneMenu id="lesson" value="#{wordsController.queryByLessonId}">
+                                <f:selectItems value="#{lessonsComponent.lessons}" />
+                            </h:selectOneMenu>
+                            <h:message for="lesson" styleClass="error" />
+
+                            <h:outputLabel for="text1">
+                                <h:outputText value="#{msg['wordsList.queryBy.text1']}" />
+                            </h:outputLabel>
+                            <h:inputText id="text1" value="#{wordsController.queryByText1}" />
+                            <h:message for="text1" styleClass="error" />
+
+                            <h:outputLabel for="text2">
+                                <h:outputText value="#{msg['wordsList.queryBy.text2']}" />
+                            </h:outputLabel>
+                            <h:inputText id="text2" value="#{wordsController.queryByText2}" />
+                            <h:message for="text2" styleClass="error" />
+
                             <h:outputText value="&nbsp;" />
                             <h:commandButton value="#{msg['button.show']}"
                                              action="#{wordsController.readWords()}"/>
                             <h:outputText value="&nbsp;" />
-
                         </h:panelGrid>
 
                     </rich:panel>
@@ -34,33 +56,39 @@
 
                 <br/>
 
-                <rich:dataTable id="wordsDataTable"
-                                var="word"
-                                value="#{wordsController.words}"
-                                rendered="#{wordsController.words != null}"
-                                style="width: 100%;">
-                    <f:facet name="header">
-                        <rich:columnGroup>
-                            <h:column>#{msg['word.id']}</h:column>
-                            <h:column>#{msg['word.text1']}</h:column>
-                            <h:column>#{msg['word.text2']}</h:column>
-                            <h:column>#{msg['button.action']}</h:column>
-                        </rich:columnGroup>
-                    </f:facet>
+                <h:panelGrid rendered="#{wordsController.words != null}"
+                             style="width: 100%;">
+                    <rich:dataScroller for="wordsDataTable" />
+                    <rich:dataTable id="wordsDataTable"
+                                    var="word"
+                                    value="#{wordsController.words}"
+                                    rows="20"
+                                    style="width: 100%;">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <h:column>#{msg['word.lesson']}</h:column>
+                                <h:column>#{msg['word.text1']}</h:column>
+                                <h:column>#{msg['word.text2']}</h:column>
+                                <h:column>#{msg['button.action']}</h:column>
+                            </rich:columnGroup>
+                        </f:facet>
 
-                    <rich:column>#{word.id}</rich:column>
-                    <rich:column>#{word.text1}</rich:column>
-                    <rich:column>#{word.text2}</rich:column>
-                    <rich:column>
-                        <h:form>
-                            <h:commandLink action="#{wordsController.readWords()}"
-                                           value="#{msg['wordsList.table.action']}" />
-                        </h:form>
-                    </rich:column>
-                </rich:dataTable>
+                        <rich:column>#{word.lesson.title}</rich:column>
+                        <rich:column>#{word.text1}</rich:column>
+                        <rich:column>#{word.text2}</rich:column>
+                        <rich:column>
+                            <h:form>
+                                <h:commandLink action="#{wordsController.readWords()}"
+                                               value="#{msg['wordsList.table.action']}" />
+                            </h:form>
+                        </rich:column>
+                    </rich:dataTable>
+                    <rich:dataScroller for="wordsDataTable" />
+                </h:panelGrid>
 
-                <h:outputText rendered="#{wordsController.words == null}"
-                              value="#{msg['common.noData']}"/>
+                <h:panelGroup rendered="#{wordsController.words == null}">
+                    <h:outputText value="#{msg['common.noData']}"/>
+                </h:panelGroup>
 
             </ui:define>
 

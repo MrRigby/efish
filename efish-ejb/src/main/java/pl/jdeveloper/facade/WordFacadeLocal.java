@@ -7,6 +7,7 @@ package pl.jdeveloper.facade;
 import java.util.List;
 import javax.ejb.Local;
 import pl.jdeveloper.entities.Word;
+import pl.jdeveloper.facade.filters.WordsFilter;
 
 /**
  *
@@ -26,6 +27,8 @@ public interface WordFacadeLocal {
     List<Word> findAll();
 
     List<Word> findRange(int[] range);
+    
+    List<Word> findAllBy(WordsFilter filter);
 
     int count();
     
