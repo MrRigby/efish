@@ -41,6 +41,24 @@
 
                     <tr>
                         <td width="100%"
+                            colspan="2"
+                            align="right">
+                            <h:panelGroup rendered="#{user == null}">
+                                Nie jesteś zalogowany.
+                                <h:link id="loginCommandLink"
+                                        outcome="/login-form.xhtml">
+                                    Kliknij 
+                                </h:link>
+                                aby się zalogować
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{user != null}">
+                                Witaj #{user}, stary ziomalu!
+                            </h:panelGroup>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100%"
                             height="100%"
                             class="bg_tabbody"
                             colspan="2">

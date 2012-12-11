@@ -38,10 +38,24 @@
                 <h:outputText value="#{msg['menu.words']}" />
             </h:link>
             <br/>
+            <br/>
+
+            <h:link id="loginCommandLink"
+                    outcome="/login-form.xhtml"
+                    rendered="#{user == null}">
+                <h:graphicImage url="/resources/images/login-icon.png" />
+                <h:outputText value=" " />
+                <h:outputText value="#{msg['menu.login']}" />
+            </h:link>
+            <br/>
 
             <h:commandLink id="logoutCommandLink"
-                           action="#{loginController.doLogout}"
-                           value="#{msg['menu.logout']}" />
+                           action="#{authController.logout()}"
+                           rendered="#{user != null}">
+                <h:graphicImage url="/resources/images/logout-icon.png"/>
+                <h:outputText value=" " />
+                <h:outputText value="#{msg['menu.logout']}" />
+            </h:commandLink>
             <br/>
 
         </rich:panel>

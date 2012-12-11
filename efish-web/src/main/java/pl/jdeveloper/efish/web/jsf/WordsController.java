@@ -22,9 +22,11 @@ public class WordsController {
 
     @EJB
     private WordFacadeLocal wordFacade;
+
     private Integer queryByLessonId;
     private String queryByText1;
     private String queryByText2;
+
     private List<Word> words;
 
     public void readWords() {

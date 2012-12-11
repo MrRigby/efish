@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+
+        <ui:composition template="./templates/main.xhtml">
+
+            <ui:define name="body">
+
+                <h:form>
+                    <rich:panel>
+                        <f:facet name="header">
+                            <h:graphicImage url="/resources/images/login-icon.png" />
+                            <h:outputText value=" " />
+                            Login to access secure pages:
+                        </f:facet>
+
+                        <h:panelGrid columns="3">
+                            <h:outputLabel for="username" value="Username" />
+                            <h:inputText id="username"
+                                         value="#{authController.username}"
+                                         required="true"
+                                         requiredMessage="Username - pole jest wymagane" />
+                            <rich:message for="username" />
+
+                            <h:outputLabel for="password" value="Password" />
+                            <h:inputSecret id="password"
+                                           value="#{authController.password}"
+                                           required="true"
+                                           requiredMessage="Password - pole jest wymagane" />
+                            <rich:message for="password" />
+
+                            <rich:notifyMessages stayTime="2000" nonblocking="true" />
+
+                            <f:facet name="footer">
+                                <h:commandButton action="#{authController.login()}" value="Login" />
+                            </f:facet>
+
+                        </h:panelGrid>
+                    </rich:panel>
+
+                    <br/>
+                    <h:panelGroup>
+                        <rich:messages globalOnly="true" />
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
