@@ -89,8 +89,9 @@
                     </rich:column>
                 </rich:dataTable>
 
-                <h:outputText rendered="#{lessonsController.lessons == null}"
-                              value="#{msg['common.noData']}"/>
+                <rich:panel rendered="#{lessonsController.lessons == null}">
+                    <h:outputText value="#{msg['common.noData']}"/>
+                </rich:panel>
 
             </ui:define>
 

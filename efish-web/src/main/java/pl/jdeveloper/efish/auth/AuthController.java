@@ -6,6 +6,7 @@ package pl.jdeveloper.efish.auth;
 
 import java.io.IOException;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -14,6 +15,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import pl.jdeveloper.entities.User;
+import pl.jdeveloper.facade.UserFacadeLocal;
 
 /**
  *
@@ -21,14 +24,15 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ManagedBean(name = "authController")
 @ViewScoped
-public class Auth {
+public class AuthController {
 
     private String username;
     private String password;
     private String originalURL;
 
-    //@EJB
-    //private UserService userService;
+    @EJB
+    private UserFacadeLocal userFacade;
+
     @PostConstruct
     public void init() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -40,16 +44,20 @@ public class Auth {
     }
 
     public void login() throws IOException {
+
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 
         try {
             request.login(username, password);
-            //User user = userService.find(username, password);
-            externalContext.getSessionMap().put("user", username);
+
+            User user = userFacade.findByUsername(username);
+
+            externalContext.getSessionMap().put("user", user);
             externalContext.redirect(originalURL);
-        } catch (ServletException e) {
+
+        } catch (ServletException ex) {
             // Handle unknown username/password in request.login().
             context.addMessage(null, new FacesMessage("Unknown login"));
         }

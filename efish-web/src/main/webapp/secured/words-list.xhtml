@@ -86,9 +86,9 @@
                     <rich:dataScroller for="wordsDataTable" />
                 </h:panelGrid>
 
-                <h:panelGroup rendered="#{wordsController.words == null}">
+                <rich:panel rendered="#{wordsController.words == null}">
                     <h:outputText value="#{msg['common.noData']}"/>
-                </h:panelGroup>
+                </rich:panel>
 
             </ui:define>
 
